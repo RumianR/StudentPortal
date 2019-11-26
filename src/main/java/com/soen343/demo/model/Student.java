@@ -10,14 +10,14 @@ import java.util.Set;
 
 @Data
 @Entity
-@PrimaryKeyJoinColumn(referencedColumnName="userId")
+@PrimaryKeyJoinColumn(referencedColumnName="user_id")
 @Table(name = "student")
 
 public class Student extends User{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(
-            name = "studentId"
+            name = "student_id"
     )
     private long studentId;
 
