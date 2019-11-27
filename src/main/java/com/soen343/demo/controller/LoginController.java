@@ -1,23 +1,19 @@
 package com.soen343.demo.controller;
 
 import com.soen343.demo.model.User;
-import com.soen343.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
 @Controller
-public class LoginController {
-
-    @Autowired
-    private UserService userService;
+public class LoginController extends BaseController {
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -25,7 +21,6 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
@@ -68,5 +63,50 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/enroll", method = RequestMethod.GET)
+    public ModelAndView enroll(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("enroll");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/addcourse", method = RequestMethod.GET)
+    public ModelAndView addcoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("courses", courseService.listAll());
+        modelAndView.setViewName("/course/addcourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/addcourse", method = RequestMethod.POST)
+    public ModelAndView addcourse(@RequestParam("courseCheckbox") String[] checkboxValue){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        userService.addCourses(user, checkboxValue);
+        modelAndView.setViewName("/enroll");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.GET)
+    public ModelAndView removecoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("courses", user.getCourses());
+        modelAndView.setViewName("/course/removecourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.POST)
+    public ModelAndView removecourse(@RequestParam("courseCheckbox") String[] checkboxValue){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        userService.removeCourses(user, checkboxValue);
+        modelAndView.setViewName("/enroll");
+        return modelAndView;
+    }
 
 }

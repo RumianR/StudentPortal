@@ -44,6 +44,6 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_course", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Role> courses;
+    private Set<Course> courses;
 
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Course</title>
+    <h2>Select the courses to add</h2>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(courses)}">
+    <form action="/enroll/addcourse" method="post">
+        <table class="table table-striped">
+            <tr>
+                <th>Select Course to Add</th>
+                <th>Section</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td><input type="checkbox" name="courseCheckbox" th:value="${course.id}"/></td>
+                <td th:text="${course.section}"></td>
+                <td th:text="${course.code}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+</body>
+</html>
