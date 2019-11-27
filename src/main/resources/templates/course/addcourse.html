@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add a Course</title>
@@ -8,18 +8,21 @@
 </head>
 <body>
 <div th:if="${not #lists.isEmpty(courses)}">
-    <table class="table table-striped">
-        <tr>
-            <th>Select Course to Add</th>
-            <th>Id</th>
-            <th>Name</th>
-        </tr>
-        <tr th:each="course : ${courses}">
-            <td><input type="checkbox" name="${course.id}"/>&nbsp;</td>
-            <td th:text="${course.section}"></td>
-            <td th:text="${course.code}"></td>
-        </tr>
-    </table>
+    <form:form modelAttribute="selectedCourses">
+        <table class="table table-striped">
+            <tr>
+                <th>Select Course to Add</th>
+                <th>Section</th>
+                <th>Name</th>
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td><form:checkbox value="${course.code}"/></td>
+                <td th:text="${course.section}"></td>
+                <td th:text="${course.code}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit" />
+    </form:form>
 </div>
 </body>
 </html>

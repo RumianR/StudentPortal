@@ -1,8 +1,6 @@
 package com.soen343.demo.controller;
 
 import com.soen343.demo.model.User;
-import com.soen343.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,7 +26,7 @@ public class LoginController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
+        modelAndView.setViewName("registration.jsp");
         return modelAndView;
     }
 
@@ -42,12 +40,12 @@ public class LoginController extends BaseController {
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("registration.jsp");
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "User has been registered successfully");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("registration.jsp");
 
         }
         return modelAndView;
