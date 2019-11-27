@@ -22,7 +22,7 @@
             <!-- Unordered list for the links -->
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/signin" th:href="@{/signin}">Log In</a>
+                    <a class="nav-link" href="#" th:href="@{/login}">Log In</a>
                 </li>
 
                 <li class="nav-item">
@@ -33,7 +33,7 @@
 
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('isAuthenticated()')}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/signin" th:href="@{/signin}">My Courses</a>
+                    <a class="nav-link">My Courses</a>
                 </li>
 
                 <li class="nav-item">
