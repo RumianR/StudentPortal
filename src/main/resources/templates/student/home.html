@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Page</title>
+</head>
+
+<body>
+<div class="container" layout:fragment="content">
+        <h1 class = "custom-link2 text-center"> Student Dashboard </h1>
+        <!-- CARD -->
+        <div class = "card-body" id="main-body">
+            <div>
+                <ul class="list-group">
+                    <div class="card gedf-card mb-5 border-0">
+                        <li class="list-group-item">
+
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" th:src="@{/images/beer.jpg}" alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0" th:utext="${userName}"></div>
+                                            <div class="h7 text-muted"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                            </div>
+                        </li>
+                    </div><!-- END/posted-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

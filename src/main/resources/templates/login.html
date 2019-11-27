@@ -1,37 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}"
       xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
 
-<div class="container">
-    <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
+<div layout:fragment="content" class="row mt-5" >
+    <div class="col-md-8 m-auto"><!-- Grid starts -->
+        <!-- BOOTSTRAP CARD -->
+        <div class="card card-body border-light shadow bg-white">
 
-        <input type="text" id="email" name="email" th:placeholder="Email"
-               class="form-control"/> <br/>
-        <input type="password" th:placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
+            <h1 class="card-title"><i class="fas fa-user"></i>  Login</h1>
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
-    </form>
+            <!-- FORM -->
+            <form th:action="@{/login}" method="POST">
+
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control border-left-0 border-right-0 border-top-0 border-muted  rounded-0"
+                            placeholder="Enter Email"
+                    />
+                </div><!-- END/email -->
+
+                <!-- PASSWORD -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control border-left-0 border-right-0 border-top-0 border-muted rounded-0"
+                            placeholder="Enter Password"
+                    />
+                </div><!-- END/password -->
+
+                <button class="btn bg-custom btn-block" name="Submit" value="Login" type="Submit"
+                        th:text="Login"></button>
+
+                <div class = "mt-3" align="center" th:if="${param.error}">
+                    <p style="font-size: 20; color: #FF1C19;">Invalid Email or Password</p>
+                </div>
+
+            </form><!-- END/form -->
+
+            <p class="lead mt-4">No Account? <a href="#" th:href="@{/registration}" class="custom-link1">Create One!</a></p>
+
+        </div><!-- END/card-->
+    </div><!-- END/grid-->
 </div>
+
 </body>
 </html>
