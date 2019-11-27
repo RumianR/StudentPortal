@@ -8,7 +8,7 @@
 </head>
 <body>
 <div th:if="${not #lists.isEmpty(courses)}">
-    <form:form modelAttribute="selectedCourses">
+    <form action="/enroll/addcourse" method="post">
         <table class="table table-striped">
             <tr>
                 <th>Select Course to Add</th>
@@ -16,13 +16,13 @@
                 <th>Name</th>
             </tr>
             <tr th:each="course : ${courses}">
-                <td><form:checkbox value="${course.code}"/></td>
+                <td><input type="checkbox" name="chicken" th:value="${course.section}"/></td>
                 <td th:text="${course.section}"></td>
                 <td th:text="${course.code}"></td>
             </tr>
         </table>
         <input type="submit" value="Submit" />
-    </form:form>
+    </form>
 </div>
 </body>
 </html>
