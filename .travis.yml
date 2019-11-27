@@ -1,6 +1,14 @@
 language: java
 
 
+gemfile:
+  - gemfiles/Gemfile.rails-2.3.x
+  - gemfiles/Gemfile.rails-3.0.x
+
+before_install:
+  - sudo apt-get update -q
+  - sudo apt-get install gcc-4.8 -y
+
 install:
   - bundle install
 
