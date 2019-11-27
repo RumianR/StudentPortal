@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Course</title>
+    <h2>Select the courses to add</h2>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(courses)}">
+    <table class="table table-striped">
+        <tr>
+            <th>Select Course to Add</th>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        <tr th:each="course : ${courses}">
+            <td><input type="checkbox" name="${course.id}"/>&nbsp;</td>
+            <td th:text="${course.section}"></td>
+            <td th:text="${course.code}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
