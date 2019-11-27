@@ -1,5 +1,8 @@
 language: java
 
+install:
+  - bundle install
+
 script:
   - mvn compile
   - mvn package
