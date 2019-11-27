@@ -12,6 +12,7 @@ before_install:
 
 
 install:
+  - bundle init
   - bundle install
 
 script:
