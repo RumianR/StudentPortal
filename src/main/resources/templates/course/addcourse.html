@@ -16,7 +16,7 @@
                 <th>Name</th>
             </tr>
             <tr th:each="course : ${courses}">
-                <td><input type="checkbox" name="chicken" th:value="${course.section}"/></td>
+                <td><input type="checkbox" name="courseCheckbox" th:value="${course.id}"/></td>
                 <td th:text="${course.section}"></td>
                 <td th:text="${course.code}"></td>
             </tr>

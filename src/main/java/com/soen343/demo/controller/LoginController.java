@@ -79,10 +79,33 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value="/enroll/addcourse", method = RequestMethod.POST)
-    public ModelAndView addcourse(@RequestParam("chicken") String[] checkboxValue){
+    public ModelAndView addcourse(@RequestParam("courseCheckbox") String[] checkboxValue){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("checkboxvalues", checkboxValue.length);
-        modelAndView.setViewName("/test");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        userService.addCourses(user, checkboxValue);
+        modelAndView.setViewName("/enroll");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.GET)
+    public ModelAndView removecoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("courses", user.getCourses());
+        modelAndView.setViewName("/course/removecourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.POST)
+    public ModelAndView removecourse(@RequestParam("courseCheckbox") String[] checkboxValue){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        userService.removeCourses(user, checkboxValue);
+        modelAndView.setViewName("/enroll");
         return modelAndView;
     }
 
