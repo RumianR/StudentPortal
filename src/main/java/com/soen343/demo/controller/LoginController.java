@@ -14,10 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-public class LoginController {
-
-    @Autowired
-    private UserService userService;
+public class LoginController extends BaseController {
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -25,7 +22,6 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
 
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
@@ -68,5 +64,19 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/enroll", method = RequestMethod.GET)
+    public ModelAndView enroll(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("enroll");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/addcourse", method = RequestMethod.GET)
+    public ModelAndView addcourse(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("courses", courseService.listAll());
+        modelAndView.setViewName("/course/addcourse");
+        return modelAndView;
+    }
 
 }
