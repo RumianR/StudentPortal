@@ -4,6 +4,15 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <title>Add a Course</title>
+    <script>
+        function checkForm(form) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+            if(!checkedOne)
+                alert("Please select a course to add.");
+            return checkedOne;
+        }
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -14,7 +23,7 @@
         <input type="submit" value="Search" onchange="location.reload()">
     </form>
     <br />
-    <form action="/enroll/addcourse" method="post">
+    <form action="/enroll/addcourse" method="post" onsubmit="return checkForm(this)">
         <table class="table table-striped table-hover">
             <tr>
                 <th>Select Course to Add</th>

@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
+import java.util.ArrayList;
+import java.util.Set;
+
+
 import java.util.HashSet;
 
 @Controller
@@ -85,7 +89,11 @@ public class LoginController extends BaseController {
     @RequestMapping(value="/enroll/addcourse", method = RequestMethod.GET)
     public ModelAndView addcoursePage(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("courses", courseService.listAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Set<Course> c = new HashSet<>(courseService.listAll());
+        c.removeAll(user.getCourses());
+        modelAndView.addObject("courses", c);
         modelAndView.setViewName("course/addcourse");
         return modelAndView;
     }
