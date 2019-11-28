@@ -302,7 +302,7 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', 'https://cors-anywhere.herokuapp.com/http://localhost:8080/greeting?courseid=' + content);
+		httpRequest.open('GET', 'https://soen343studentapp.herokuapp.com/greeting?courseid=' + content);
         // httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
