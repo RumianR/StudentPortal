@@ -171,7 +171,7 @@ public class LoginController extends BaseController {
 
         modelAndView.addObject("User",  user.getFirstName() + "'s Schedule");
 
-        modelAndView.setViewName("schedule");
+        modelAndView.setViewName("student/schedule");
         return modelAndView;
     }
 
