@@ -1,12 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Enrolment</title>
-    <h2>Manage Courses</h2>
 </head>
 <body>
-    <input type="button" onClick="location.href='/enroll/addcourse'" value="Add a Course">
-    <input type="button" onClick="location.href='/enroll/removecourse'" value="Remove a Course">
+    <div class="container" layout:fragment="content">
+        <h1 class = "custom-link2 text-center"> Course Enrollment </h1>
+        <!-- CARD -->
+        <div class = "card-body" id="main-body">
+            <div>
+                <ul class="list-group">
+                    <div class="card gedf-card mb-5 border-0">
+                        <li class="list-group-item">
+                            <div class="card-header">
+                                <input class="btn-block mt-3 btn-success" type="button" onClick="location.href='/enroll/addcourse'" value="Add a Course">
+                                <br/>
+                                <input class="btn-block btn-danger" type="button" onClick="location.href='/enroll/removecourse'" value="Remove a Course">
+                                <br />
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Instructor</th>
+                                        <th>Section</th>
+                                        <th>Location</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    <tr th:each="course : ${courses}">
+                                        <td th:text="${course.code}"></td>
+                                        <td th:text="${course.name}"></td>
+                                        <td th:text="${course.instructor}"></td>
+                                        <td th:text="${course.section}"></td>
+                                        <td th:text="${course.location}"></td>
+                                        <td th:text="${course.time}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

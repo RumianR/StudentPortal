@@ -35,5 +35,9 @@ public class Course {
     private String section;
     @Column(name = "term")
     private String term;
+    @Column(name = "time_start")
+    private String timeStart;
+    @Column(name = "time_end")
+    private String timeEnd;
 
 }

@@ -10,4 +10,7 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
     List<Course> findByIdIn(int[] ids);
+
+
+    Course findCourseById(int id);
 }

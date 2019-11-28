@@ -11,15 +11,16 @@
 </head>
 <body>
 
-<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light" th:fragment="header">
     <div class="container">
-        <!-- LOGO -->
-        <a class="navbar-brand" href="#"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
 
-        <!-- We could collapse this section if we had mobile responsive website-->
+        <a th:if="${#authorization.expression('!isAuthenticated()')}"
+           class="navbar-brand" href="#" th:href="@{/login}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
+
+        <a th:if="${#authorization.expression('isAuthenticated()')}"
+           class="navbar-brand" href="#" th:href="@{/student/home}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
+
         <div>
-            <!-- Unordered list for the links -->
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/login}">Log In</a>
@@ -37,22 +38,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/enroll" class="nav-link">Manage Courses</a>
+                    <a href="/enroll" class="nav-link">Enroll</a>
                 </li>
 
                 <li class="nav-item">
-                    <form th:action="@{/logout}" method="get">
-                        <button class="btn btn-md btn-danger btn-block" name="registration"
-                                type="Submit">Logout
-                        </button>
-                    </form>
+                    <a href="/viewschedule" class="nav-link">View Schedule</a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">Logout</a>
+                </li>
             </ul>
 
-            </ul><!--END/Unordered list-->
-        </div><!-- END/section-->
-    </div><!-- END/container to center it-->
+            </ul>
+        </div>
+    </div>
 </nav>
 </body>
 </html>
