@@ -302,8 +302,8 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', 'http://localhost:8080/greeting?courseid=' + content);
-        httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
+		httpRequest.open('GET', 'https://cors-anywhere.herokuapp.com/http://localhost:8080/greeting?courseid=' + content);
+        // httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
 
