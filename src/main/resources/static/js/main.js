@@ -293,6 +293,7 @@
 		var self = this;
 
 		httpRequest = new XMLHttpRequest();
+
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
 	      if (httpRequest.status === 200) {
@@ -301,7 +302,8 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', 'http://localhost:8080/greeting?courseid=' + content);
+		httpRequest.open('GET', 'https://soen343studentapp.herokuapp.com/greeting?courseid=' + content);
+        // httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
 

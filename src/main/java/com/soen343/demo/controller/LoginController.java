@@ -18,9 +18,6 @@ import java.util.Set;
 
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 public class LoginController extends BaseController {
@@ -89,7 +86,7 @@ public class LoginController extends BaseController {
     public ModelAndView addcoursePage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("courses", courseService.listAll());
-        modelAndView.setViewName("/course/addcourse");
+        modelAndView.setViewName("course/addcourse");
         return modelAndView;
     }
 
@@ -110,7 +107,7 @@ public class LoginController extends BaseController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("courses", user.getCourses());
-        modelAndView.setViewName("/course/removecourse");
+        modelAndView.setViewName("course/removecourse");
         return modelAndView;
     }
 
@@ -133,7 +130,7 @@ public class LoginController extends BaseController {
                 courses.add(c);
         }
         modelAndView.addObject("courses", courses);
-        modelAndView.setViewName("/course/addcourse");
+        modelAndView.setViewName("course/addcourse");
         return modelAndView;
     }
 
@@ -174,16 +171,16 @@ public class LoginController extends BaseController {
 
         modelAndView.addObject("User",  user.getFirstName() + "'s Schedule");
 
-        modelAndView.setViewName("/student/schedule");
+        modelAndView.setViewName("student/schedule");
         return modelAndView;
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "*")
     @RequestMapping("/greeting")
     public ModelAndView test(@RequestParam("courseid") String courseid){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("course", courseService.findCourseById(Integer.parseInt(courseid)));
-        modelAndView.setViewName("/student/courseDetails");
+        modelAndView.setViewName("student/courseDetails");
         return modelAndView;
     }
 
