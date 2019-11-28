@@ -20,6 +20,4 @@ public class BaseController{
     @Autowired
     protected CourseService courseService;
 
-
-
 }
