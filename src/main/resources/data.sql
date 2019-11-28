@@ -9,7 +9,9 @@ VALUES(1,
 'S.W. ARCHITECURE & DESIGN I',
 'G',
 'Fall 2019',
-'WeFr 1:15PM - 2:30PM'
+'WeFr 1:15PM - 2:30PM',
+'14:30',
+'13:15'
  );
 
  REPLACE INTO course
@@ -21,7 +23,9 @@ VALUES(2,
 'INTRO/THEORETICAL COMP SCI',
 'H',
 'Fall 2019',
-'MoWe 4:15PM - 5:30PM'
+'MoWe 4:15PM - 5:30PM',
+'17:30',
+'16:15'
  );
 
 
@@ -34,7 +38,9 @@ VALUES(3,
 'SW REQUIREMENTS + SPECIFICATION',
 'HH',
 'Fall 2019',
-'Th 5:45PM - 8:15PM'
+'Th 9:00AM - 10:15AM',
+'10:30',
+'9:15'
  );
 
  REPLACE INTO course
@@ -46,7 +52,9 @@ VALUES(4,
 'Mathematics for Computer Science',
 'M',
 'Fall 2019',
-'Fr 5:45PM - 8:15PM'
+'MonTu 10:45AM - 12:15PM',
+'12:15',
+'10:45'
  );
 
  REPLACE INTO course
@@ -59,7 +67,9 @@ VALUES(5,
 'MGMT+QUALITY CTRL./SW DEV.',
 'G',
 'Fall 2019',
-'WeFr 10:15AM - 11:30AM'
+'WeFr 10:15AM - 11:30AM',
+'11:30',
+'10:15'
  );
 
 

@@ -26,5 +26,10 @@ public class CourseService {
         return courses;
     }
 
+    public Course findCourseById(int id){
+        return courseRepository.findCourseById(id);
+    }
+
+
 
 }
