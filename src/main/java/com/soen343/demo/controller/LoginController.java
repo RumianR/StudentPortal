@@ -2,6 +2,9 @@ package com.soen343.demo.controller;
 
 import com.soen343.demo.model.Course;
 import com.soen343.demo.model.User;
+import com.soen343.demo.service.CourseService;
+import com.soen343.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,12 +21,17 @@ import java.util.Set;
 
 
 import java.util.HashSet;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
-public class LoginController extends BaseController {
+public class LoginController  {
+
+    @Autowired
+    protected UserService userService;
+    @Autowired
+    protected CourseService courseService;
+
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-
 
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
