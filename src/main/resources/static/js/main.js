@@ -303,7 +303,6 @@
 	    }
 		};
 		httpRequest.open('GET', 'http://localhost:8080/greeting?courseid=' + content);
-        httpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
         httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
