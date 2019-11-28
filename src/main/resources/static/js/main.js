@@ -293,8 +293,7 @@
 		var self = this;
 
 		httpRequest = new XMLHttpRequest();
-        httpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-        httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
+
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
 	      if (httpRequest.status === 200) {
@@ -304,6 +303,8 @@
 	    }
 		};
 		httpRequest.open('GET', 'http://localhost:8080/greeting?courseid=' + content);
+        httpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+        httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
 
