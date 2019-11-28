@@ -293,6 +293,8 @@
 		var self = this;
 
 		httpRequest = new XMLHttpRequest();
+        httpRequest.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+        httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === XMLHttpRequest.DONE) {
 	      if (httpRequest.status === 200) {

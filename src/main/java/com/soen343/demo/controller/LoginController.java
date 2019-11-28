@@ -185,7 +185,7 @@ public class LoginController  {
         return modelAndView;
     }
 
-    @CrossOrigin(origins = "https://soen343studentapp.herokuapp.com")
+    @CrossOrigin(origins = "*")
     @RequestMapping("/greeting")
     public ModelAndView test(@RequestParam("courseid") String courseid){
         ModelAndView modelAndView = new ModelAndView();
