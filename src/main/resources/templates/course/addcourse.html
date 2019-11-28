@@ -10,6 +10,8 @@
             var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
             if(!checkedOne)
                 alert("Please select a course to add.");
+            else
+                alert("The selected courses have been successfully added.");
             return checkedOne;
         }
     </script>

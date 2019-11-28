@@ -3,7 +3,7 @@
       layout:decorate="~{fragments/layout}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Enrolment</title>
+    <title>Enrollment</title>
 </head>
 <body>
     <div class="container" layout:fragment="content">
@@ -19,6 +19,7 @@
                                 <br/>
                                 <input class="btn-block btn-danger" type="button" onClick="location.href='/enroll/removecourse'" value="Remove a Course">
                                 <br />
+                                <div th:if="${not #lists.isEmpty(courses)}">
                                 <table class="table table-striped">
                                     <tr>
                                         <th>Code</th>
@@ -37,6 +38,10 @@
                                         <td th:text="${course.time}"></td>
                                     </tr>
                                 </table>
+                                </div>
+                                <div th:if="${#lists.isEmpty(courses)}">
+                                    <p class="text-center" style="font-size: 20px">You are not currently enrolled in any courses.</p>
+                                </div>
                             </div>
                         </li>
                     </div>
