@@ -175,7 +175,7 @@ public class LoginController extends BaseController {
         return modelAndView;
     }
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin
     @RequestMapping("/greeting")
     public ModelAndView test(@RequestParam("courseid") String courseid){
         ModelAndView modelAndView = new ModelAndView();
