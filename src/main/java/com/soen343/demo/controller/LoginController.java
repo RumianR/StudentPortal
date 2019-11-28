@@ -22,6 +22,8 @@ import java.util.HashSet;
 @Controller
 public class LoginController extends BaseController {
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+
 
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
