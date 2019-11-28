@@ -17,6 +17,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class LoginController extends BaseController {
@@ -74,6 +78,9 @@ public class LoginController extends BaseController {
     @RequestMapping(value="/enroll", method = RequestMethod.GET)
     public ModelAndView enroll(){
         ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("courses", user.getCourses());
         modelAndView.setViewName("enroll");
         return modelAndView;
     }
@@ -92,7 +99,7 @@ public class LoginController extends BaseController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         userService.addCourses(user, checkboxValue);
-        modelAndView.setViewName("/enroll");
+        modelAndView.setViewName("redirect:/enroll"); // Need redirect to refresh the /enroll page
         return modelAndView;
     }
 
@@ -113,7 +120,20 @@ public class LoginController extends BaseController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         userService.removeCourses(user, checkboxValue);
-        modelAndView.setViewName("/enroll");
+        modelAndView.setViewName("redirect:/enroll");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/enroll/search", method = RequestMethod.POST)
+    public ModelAndView searchcourse(@RequestParam("courseIdentifier") String courseIdentifier){
+        ModelAndView modelAndView = new ModelAndView();
+        Set<Course> courses = new HashSet<>();
+        for(Course c : courseService.listAll()) {
+            if (c.getCode().contains(courseIdentifier.toUpperCase()))
+                courses.add(c);
+        }
+        modelAndView.addObject("courses", courses);
+        modelAndView.setViewName("/course/addcourse");
         return modelAndView;
     }
 
