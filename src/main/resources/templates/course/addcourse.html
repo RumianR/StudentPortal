@@ -49,6 +49,9 @@
         <input class="btn bg-custom btn-block m-auto" type="submit" value="Add the selected courses to my schedule" />
     </form>
 </div>
+    <div th:if="${#lists.isEmpty(courses)}">
+        <p class="text-center" style="font-size: 20px">You are either currently enrolled in the maximum course load of 5 or there are no available courses to enroll in. Please contact the faculty for more information.</p>
+    </div>
 </div>
 </body>
 </html>
