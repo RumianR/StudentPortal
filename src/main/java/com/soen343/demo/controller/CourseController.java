@@ -23,17 +23,17 @@ public class CourseController {
     @Autowired
     protected CourseService courseService;
 
-    @RequestMapping(value="/enroll", method = RequestMethod.GET)
+    @RequestMapping(value="/student/enroll", method = RequestMethod.GET)
     public ModelAndView enroll(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("courses", user.getCourses());
-        modelAndView.setViewName("enroll");
+        modelAndView.setViewName("student/enroll");
         return modelAndView;
     }
 
-    @RequestMapping(value="/enroll/addcourse", method = RequestMethod.GET)
+    @RequestMapping(value="/student/enroll/addcourse", method = RequestMethod.GET)
     public ModelAndView addcoursePage(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -41,51 +41,54 @@ public class CourseController {
         Set<Course> c = new HashSet<>(courseService.listAll());
         c.removeAll(user.getCourses());
         modelAndView.addObject("courses", c);
-        modelAndView.setViewName("course/addcourse");
+        modelAndView.setViewName("/student/addcourse");
         return modelAndView;
     }
 
-    @RequestMapping(value="/enroll/addcourse", method = RequestMethod.POST)
+    @RequestMapping(value="/student/enroll/addcourse", method = RequestMethod.POST)
     public ModelAndView addcourse(@RequestParam("courseCheckbox") String[] checkboxValue){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         userService.addCourses(user, checkboxValue);
-        modelAndView.setViewName("redirect:/enroll"); // Need redirect to refresh the /enroll page
+        modelAndView.setViewName("redirect:/student/enroll"); // Need redirect to refresh the /enroll page
         return modelAndView;
     }
 
 
-    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.GET)
+    @RequestMapping(value="/student/enroll/removecourse", method = RequestMethod.GET)
     public ModelAndView removecoursePage(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("courses", user.getCourses());
-        modelAndView.setViewName("course/removecourse");
+        modelAndView.setViewName("student/removecourse");
         return modelAndView;
     }
 
-    @RequestMapping(value="/enroll/removecourse", method = RequestMethod.POST)
+    @RequestMapping(value="/student/enroll/removecourse", method = RequestMethod.POST)
     public ModelAndView removecourse(@RequestParam("courseCheckbox") String[] checkboxValue){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         userService.removeCourses(user, checkboxValue);
-        modelAndView.setViewName("redirect:/enroll");
+        modelAndView.setViewName("redirect:/student/enroll");
         return modelAndView;
     }
 
-    @RequestMapping(value="/enroll/search", method = RequestMethod.POST)
+    @RequestMapping(value="/student/enroll/search", method = RequestMethod.POST)
     public ModelAndView searchcourse(@RequestParam("courseIdentifier") String courseIdentifier){
         ModelAndView modelAndView = new ModelAndView();
-        Set<Course> courses = new HashSet<>();
-        for(Course c : courseService.listAll()) {
+        Set<Course> courses = new HashSet<>(courseService.listAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        courses.removeAll(user.getCourses());
+        for(Course c : courses) {
             if (c.getCode().contains(courseIdentifier.toUpperCase()))
                 courses.add(c);
         }
         modelAndView.addObject("courses", courses);
-        modelAndView.setViewName("course/addcourse");
+        modelAndView.setViewName("student/addcourse");
         return modelAndView;
     }
 

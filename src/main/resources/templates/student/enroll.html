@@ -15,9 +15,9 @@
                     <div class="card gedf-card mb-5 border-0">
                         <li class="list-group-item">
                             <div class="card-header">
-                                <input class="btn-block mt-3 btn-success" type="button" onClick="location.href='/enroll/addcourse'" value="Add a Course">
+                                <input class="btn-block mt-3 btn-success" type="button" onClick="location.href='/student/enroll/addcourse'" value="Add a Course">
                                 <br/>
-                                <input class="btn-block btn-danger" type="button" onClick="location.href='/enroll/removecourse'" value="Remove a Course">
+                                <input class="btn-block btn-danger" type="button" onClick="location.href='/student/enroll/removecourse'" value="Remove a Course">
                                 <br />
                                 <div th:if="${not #lists.isEmpty(courses)}">
                                 <table class="table table-striped">
