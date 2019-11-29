@@ -1,6 +1,7 @@
 package com.soen343.demo;
 
 
+import com.soen343.demo.service.CourseServiceTest;
 import com.soen343.demo.service.UserServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,6 +10,7 @@ import org.junit.runners.Suite;
 
 @Suite.SuiteClasses({
         UserServiceTest.class,
+        CourseServiceTest.class,
 })
 
 public class ServiceTestSuite {
