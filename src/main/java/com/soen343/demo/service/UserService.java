@@ -49,7 +49,6 @@ public class UserService {
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        userRepository.save(user);
         return userRepository.save(user);
     }
 
