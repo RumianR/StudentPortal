@@ -167,7 +167,7 @@ public class CourseController {
     public ModelAndView facultyEditcourse(@ModelAttribute Course course){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        courseService.saveCourse(course);
+        courseService.saveEditedCourse(course);
         modelAndView.setViewName("redirect:/faculty/managecourses"); // Need redirect to refresh the faculty/manage page
         return modelAndView;
     }

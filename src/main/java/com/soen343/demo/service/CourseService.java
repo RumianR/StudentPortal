@@ -86,6 +86,11 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
+
+    public Course saveEditedCourse(Course course) {
+        return courseRepository.save(course);
+    }
+
     public void removeCourses(String[] CoursesRequest) {
 
 
