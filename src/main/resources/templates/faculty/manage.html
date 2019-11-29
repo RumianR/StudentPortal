@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enrollment</title>
+</head>
+<body>
+    <div class="container" layout:fragment="content">
+        <h1 class = "custom-link2 text-center"> Course Enrollment </h1>
+        <!-- CARD -->
+        <div class = "card-body" id="main-body">
+            <div>
+                <ul class="list-group">
+                    <div class="card gedf-card mb-5 border-0">
+                        <li class="list-group-item">
+                            <div class="card-header">
+                                <input class="btn-block mt-3 btn-success" type="button" onClick="location.href='/faculty/addcourse'" value="Add a Course">
+                                <br/>
+                                <input class="btn-block btn-danger" type="button" onClick="location.href='/faculty/chosecourse'" value="Edit a Course">
+                                <br />
+                                <input class="btn-block btn-danger" type="button" onClick="location.href='/faculty/removecourse'" value="Remove a Course">
+                                <br />
+                                <div th:if="${not #lists.isEmpty(courses)}">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Instructor</th>
+                                        <th>Section</th>
+                                        <th>Location</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    <tr th:each="course : ${courses}">
+                                        <td th:text="${course.code}"></td>
+                                        <td th:text="${course.name}"></td>
+                                        <td th:text="${course.instructor}"></td>
+                                        <td th:text="${course.section}"></td>
+                                        <td th:text="${course.location}"></td>
+                                        <td th:text="${course.time}"></td>
+                                    </tr>
+                                </table>
+                                </div>
+                                <div th:if="${#lists.isEmpty(courses)}">
+                                    <p class="text-center" style="font-size: 20px">You are not currently enrolled in any courses.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
