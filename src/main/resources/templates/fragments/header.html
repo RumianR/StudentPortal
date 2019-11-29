@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Admin Page</title>
@@ -20,7 +20,7 @@
         <a th:if="${#authorization.expression('isAuthenticated()')}"
            class="navbar-brand" href="#" th:href="@{/home}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
 
-        <div>
+        <div sec:authorize="hasAuthority('STUDENT')">
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('!isAuthenticated()')}">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/login}">Log In</a>
@@ -34,11 +34,36 @@
 
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('isAuthenticated()')}">
                 <li class="nav-item">
-                    <a href="/enroll" class="nav-link">Enroll</a>
+                    <a href="/student/enroll" class="nav-link">Enroll</a>
                 </li>
 
                 <li class="nav-item">
                     <a href="/viewschedule" class="nav-link">View Schedule</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">Logout</a>
+                </li>
+            </ul>
+
+            </ul>
+        </div>
+
+        <div sec:authorize="hasAuthority('FACULTY')">
+            <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('!isAuthenticated()')}">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/login}">Log In</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/registration}">Register</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('isAuthenticated()')}">
+                <li class="nav-item">
+                    <a href="/faculty/managecourses" class="nav-link">Manage Courses</a>
                 </li>
 
                 <li class="nav-item">

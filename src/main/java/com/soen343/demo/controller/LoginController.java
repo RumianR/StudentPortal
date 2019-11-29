@@ -99,19 +99,8 @@ public class LoginController{
             }
         }
 
-        modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-
-        if (isFaculty) {
-            modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-            modelAndView.setViewName("faculty/home");
-
-        }
-
-        else {
-
-            modelAndView.setViewName("student/home");
-        }
-
+        modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName());
+        modelAndView.setViewName("home");
         return modelAndView;
     }
 

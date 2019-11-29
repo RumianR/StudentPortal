@@ -28,7 +28,9 @@
             <p>Location: <input type="text" th:field="*{location}" /></p>
             <p>Name: <input type="text" th:field="*{name}" /></p>
             <p>Section: <input type="text" th:field="*{section}" /></p>
-            <p>Time: <input type="text" th:field="*{time}" /></p>
+            <input type="hidden" th:field="*{time}" />
+            <input type="hidden" th:field="*{timeStart}" />
+            <input type="hidden" th:field="*{timeEnd}" />
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
 <!--    <div th:if="${#lists.isEmpty(courses)}">-->
