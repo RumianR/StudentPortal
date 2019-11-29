@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Remove a Course</title>
+<!--    <script>-->
+<!--        function checkForm(form) {-->
+<!--            var checkboxes = document.querySelectorAll('input[type="checkbox"]');-->
+<!--            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);-->
+<!--            if(!checkedOne)-->
+<!--                alert("Please select a course to remove.");-->
+<!--            else-->
+<!--                alert("The selected courses have been successfully removed.")-->
+<!--            return checkedOne;-->
+<!--        }-->
+<!--    </script>-->
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 class = "custom-link2 text-center"> Remove a Course </h1>
+    <div class="card card-body mt-5" th:if="${not #lists.isEmpty(courses)}">
+        <form action="/faculty/chosecourse" method="post" onsubmit="return checkForm(this)">
+            <table class="table table-striped table-hover">
+                <tr>
+                <th>Select Course to Remove</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Instructor</th>
+                <th>Section</th>
+                <th>Location</th>
+                <th>Time</th>
+                </tr>
+                <tr th:each="course : ${courses}">
+                <td><input type="radio" name="courseRadiovalue" th:value="${course.id}"/></td>
+                <td th:text="${course.code}"></td>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.instructor}"></td>
+                <td th:text="${course.section}"></td>
+                <td th:text="${course.location}"></td>
+                <td th:text="${course.time}"></td>
+                </tr>
+            </table>
+        <input class="btn bg-custom btn-block m-auto" type="submit" value="Edit the selected course from course offering" />
+    </form>
+    </div>
+    <div th:if="${#lists.isEmpty(courses)}">
+        <p class="text-center" style="font-size: 20px">There are no courses to remove.</p>
+    </div>
+</div>
+</body>
+</html>

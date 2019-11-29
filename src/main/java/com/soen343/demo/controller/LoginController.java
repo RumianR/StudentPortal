@@ -6,6 +6,7 @@ import com.soen343.demo.service.CourseService;
 import com.soen343.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,15 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
 
 
 import java.util.ArrayList;
 import java.util.Set;
-
-
-import java.util.HashSet;
 
 @Controller
 public class LoginController{
@@ -73,14 +70,48 @@ public class LoginController{
         return modelAndView;
     }
 
-    @RequestMapping(value="/student/home", method = RequestMethod.GET)
-    public ModelAndView home(){
+//    @RequestMapping(value="/student/home", method = RequestMethod.GET)
+//    public ModelAndView home(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userService.findUserByEmail(auth.getName());
+//        modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+//        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+//        modelAndView.setViewName("student/home");
+//        return modelAndView;
+//    }
+
+    @RequestMapping(value="/home", method = RequestMethod.GET)
+    public ModelAndView defaultHome(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        boolean isStudent = false;
+        boolean isFaculty = false;
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        for (GrantedAuthority grantedAuthority : authorities){
+            if (grantedAuthority.getAuthority().equals("STUDENT")) {
+                isStudent = true;
+                break;
+            }else if (grantedAuthority.getAuthority().equals("FACULTY")) {
+                isFaculty = true;
+                break;
+            }
+        }
+
         modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("student/home");
+
+        if (isFaculty) {
+            modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+            modelAndView.setViewName("faculty/home");
+
+        }
+
+        else {
+
+            modelAndView.setViewName("student/home");
+        }
+
         return modelAndView;
     }
 

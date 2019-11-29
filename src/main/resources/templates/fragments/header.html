@@ -18,7 +18,7 @@
            class="navbar-brand" href="#" th:href="@{/login}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
 
         <a th:if="${#authorization.expression('isAuthenticated()')}"
-           class="navbar-brand" href="#" th:href="@{/student/home}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
+           class="navbar-brand" href="#" th:href="@{/home}"><i class="fas fa-graduation-cap"></i>    Student Portal</a>
 
         <div>
             <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('!isAuthenticated()')}">

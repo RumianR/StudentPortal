@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Edit a Course</title>
+<!--    <script>-->
+<!--        function checkForm(form) {-->
+<!--            var checkboxes = document.querySelectorAll('input[type="checkbox"]');-->
+<!--            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);-->
+<!--            if(!checkedOne)-->
+<!--                alert("Please select a course to add.");-->
+<!--            else-->
+<!--                alert("The selected courses have been successfully added.");-->
+<!--            return checkedOne;-->
+<!--        }-->
+<!--    </script>-->
+</head>
+<body>
+<div layout:fragment="content">
+    <h1 class = "custom-link2 text-center"> Add a Course </h1>
+
+        <form action="#" th:action="@{/faculty/editcourse}" th:object="${course}" method="post">
+            <input type="hidden" th:field="*{id}" />
+            <p>Code: <input type="text" th:field="*{code}" /></p>
+            <p>Description: <input type="text" th:field="*{description}" /></p>
+            <p>Instructor: <input type="text" th:field="*{instructor}" /></p>
+            <p>Location: <input type="text" th:field="*{location}" /></p>
+            <p>Name: <input type="text" th:field="*{name}" /></p>
+            <p>Section: <input type="text" th:field="*{section}" /></p>
+            <p>Time: <input type="text" th:field="*{time}" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+<!--    <div th:if="${#lists.isEmpty(courses)}">-->
+<!--        <p class="text-center" style="font-size: 20px">You are either currently enrolled in the maximum course load of 5 or there are no available courses to enroll in. Please contact the faculty for more information.</p>-->
+<!--    </div>-->
+</div>
+</body>
+</html>
