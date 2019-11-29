@@ -1,6 +1,5 @@
 package com.soen343.demo.controller;
 
-import com.soen343.demo.model.Course;
 import com.soen343.demo.model.User;
 import com.soen343.demo.service.CourseService;
 import com.soen343.demo.service.UserService;
@@ -9,22 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Set;
-
-
-import java.util.ArrayList;
-import java.util.Set;
-
-
-import java.util.HashSet;
 
 @Controller
 public class LoginController{
