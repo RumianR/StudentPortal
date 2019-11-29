@@ -41,7 +41,7 @@ public class CourseController {
         Set<Course> c = new HashSet<>(courseService.listAll());
         c.removeAll(user.getCourses());
         modelAndView.addObject("courses", c);
-        modelAndView.setViewName("/student/addcourse");
+        modelAndView.setViewName("student/addcourse");
         return modelAndView;
     }
 
@@ -83,11 +83,12 @@ public class CourseController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         courses.removeAll(user.getCourses());
+        Set<Course> output = new HashSet<>();
         for(Course c : courses) {
             if (c.getCode().contains(courseIdentifier.toUpperCase()))
-                courses.add(c);
+                output.add(c);
         }
-        modelAndView.addObject("courses", courses);
+        modelAndView.addObject("courses", output);
         modelAndView.setViewName("student/addcourse");
         return modelAndView;
     }

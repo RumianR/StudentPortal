@@ -9,8 +9,6 @@
 
 <body>
 <div class="container" layout:fragment="content">
-    <h1 class = "custom-link2 text-center" sec:authorize="hasAuthority('STUDENT')"> Student Dashboard </h1>
-    <h1 class = "custom-link2 text-center" sec:authorize="hasAuthority('FACULTY')"> Faculty Dashboard </h1>
     <!-- CARD -->
     <div class = "card-body" id="main-body">
         <div>
@@ -31,6 +29,22 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <h4 class="custom-link1 text-center">Final Exam Schedule for December 2019</h4>
+                            <p>The December Final Examination Schedule is now available on your Student Center page. If you have exam conflicts, you have until Wednesday November 13th 2019 to report how you wish to resolve them.
+                                Please note that you must report your conflict before the deadline, otherwise it will not be accepted.</p>
+                            <div class="text-center mt-4 mb-4">
+                                <a href="http://www.concordia.ca/conduct/sexual-violence/training.html?utm_source=vanity&utm_medium=multiplatform&utm_campaign=allofus" target="_blank"><img th:src="@{/images/ItTakesAllOfUs.jpg}"></a>
+                            </div>
+                            <h4 class="custom-link1 text-center">Students from all faculties:</h4>
+                            <p>Here is your chance to enroll in the new elective group in “Knowledge Implementation, Networking and Decision-Making (KIND)”.
+
+                                In this elective group, you will select and attend a variety of WSSR workshops led by prominent guest lecturers.
+                                Visit our website to find out more:
+                                <a href="http://www.concordia.ca/WSSR" target="_blank">www.concordia.ca/WSSR</a>
+                            </p>
+                            <div class="text-center mt-4 mb-4">
+                                <a href="http://www.concordia.ca/artsci/polisci/wssr.html" target="_blank"><img th:src="@{/images/WSSR_portallogo.jpg}"></a>
+                            </div>
                         </div>
                     </li>
                 </div>
