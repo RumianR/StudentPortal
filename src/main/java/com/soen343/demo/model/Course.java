@@ -39,5 +39,7 @@ public class Course {
     private String timeStart;
     @Column(name = "time_end")
     private String timeEnd;
+    @Transient
+    private int eventId;
 
 }

@@ -36,7 +36,11 @@ public class ScheduleController {
         ArrayList<Course> ThCourses = new ArrayList<>();
         ArrayList<Course> FrCourses = new ArrayList<>();
 
+        int i = 5;
+
         for (Course course: courses) {
+            course.setEventId(i--);
+
             if(course.getTime().contains("Mo")){
                 MoCourses.add(course);
             }

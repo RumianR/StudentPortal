@@ -29,6 +29,7 @@ public class CourseController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         modelAndView.addObject("courses", user.getCourses());
+        modelAndView.addObject("max", user.getCourses().size() > 4? true: false);
         modelAndView.setViewName("student/enroll");
         return modelAndView;
     }

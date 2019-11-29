@@ -46,7 +46,7 @@
   
           <ul  th:if="${not #lists.isEmpty(Mo)}">
             <li th:each="course : ${Mo}" class="cd-schedule__event">
-              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.id}" href="#0">
+              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.EventId}" href="#0">
                 <em class="cd-schedule__name" th:text="${course.code}"></em>
               </a>
             </li>
@@ -58,7 +58,7 @@
 
           <ul  th:if="${not #lists.isEmpty(Tu)}">
             <li th:each="course : ${Tu}" class="cd-schedule__event">
-              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.id}" href="#0">
+              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.EventId}" href="#0">
                 <em class="cd-schedule__name" th:text="${course.code}"></em>
               </a>
             </li>
@@ -70,7 +70,7 @@
 
           <ul  th:if="${not #lists.isEmpty(We)}">
             <li th:each="course : ${We}" class="cd-schedule__event">
-              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.id}" href="#0">
+              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.EventId}" href="#0">
                 <em class="cd-schedule__name" th:text="${course.code}"></em>
               </a>
             </li>
@@ -82,7 +82,7 @@
 
           <ul  th:if="${not #lists.isEmpty(Th)}">
             <li th:each="course : ${Th}" class="cd-schedule__event">
-              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.id}" href="#0">
+              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.EventId}" href="#0">
                 <em class="cd-schedule__name" th:text="${course.code}"></em>
               </a>
             </li>
@@ -94,7 +94,7 @@
 
           <ul  th:if="${not #lists.isEmpty(Fr)}">
             <li th:each="course : ${Fr}" class="cd-schedule__event">
-              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.id}" href="#0">
+              <a th:data-start="${course.timeStart}" th:data-end="${course.timeEnd}" th:data-content="${course.id}" th:data-event="${'event-' + course.EventId}" href="#0">
                 <em class="cd-schedule__name" th:text="${course.code}"></em>
               </a>
             </li>
