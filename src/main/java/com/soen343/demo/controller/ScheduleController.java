@@ -70,7 +70,7 @@ public class ScheduleController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping("/greeting")
+    @RequestMapping("/student/coursedetail")
     public ModelAndView test(@RequestParam("courseid") String courseid){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("course", courseService.findCourseById(Integer.parseInt(courseid)));

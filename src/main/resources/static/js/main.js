@@ -302,7 +302,7 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', 'https://soen343studentapp.herokuapp.com/greeting?courseid=' + content);
+		httpRequest.open('GET', 'https://soen343studentapp.herokuapp.com/student/coursedetail?courseid=' + content);
         // httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};
