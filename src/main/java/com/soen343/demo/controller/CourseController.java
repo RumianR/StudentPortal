@@ -41,7 +41,7 @@ public class CourseController {
         Set<Course> c = new HashSet<>(courseService.listAll());
         c.removeAll(user.getCourses());
         modelAndView.addObject("courses", c);
-        modelAndView.setViewName("/student/addcourse");
+        modelAndView.setViewName("student/addcourse");
         return modelAndView;
     }
 
