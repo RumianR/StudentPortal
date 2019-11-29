@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,6 +86,84 @@ public class CourseController {
         }
         modelAndView.addObject("courses", courses);
         modelAndView.setViewName("course/addcourse");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/faculty/managecourses", method = RequestMethod.GET)
+    public ModelAndView facultyManageCourses(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Set<Course> courses = new HashSet<>(courseService.listAll());
+        modelAndView.addObject("courses", courses);
+        modelAndView.setViewName("faculty/manage");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/faculty/addcourse", method = RequestMethod.GET)
+    public ModelAndView facultyAddcoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        modelAndView.addObject("course", new Course());
+        modelAndView.setViewName("faculty/addcourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/faculty/addcourse", method = RequestMethod.POST)
+    public ModelAndView facultyAddcourse(@ModelAttribute Course course){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        courseService.saveCourse(course);
+        modelAndView.setViewName("redirect:/faculty/managecourses"); // Need redirect to refresh the faculty/manage page
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/faculty/removecourse", method = RequestMethod.GET)
+    public ModelAndView facultyRemovecoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        modelAndView.addObject("courses", courseService.listAll());
+        modelAndView.setViewName("faculty/removecourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/faculty/removecourse", method = RequestMethod.POST)
+    public ModelAndView facultyRemovecourse(@RequestParam("courseCheckbox") String[] checkboxValue){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        courseService.removeCourses(checkboxValue);
+        modelAndView.setViewName("redirect:/faculty/managecourses"); // Need redirect to refresh the faculty/manage page
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/faculty/chosecourse", method = RequestMethod.GET)
+    public ModelAndView facultyChosecoursePage(){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        modelAndView.addObject("courses", courseService.listAll());
+        modelAndView.setViewName("faculty/chosecourse");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/faculty/chosecourse", method = RequestMethod.POST)
+    public ModelAndView facultyChosecoursePage(@RequestParam("courseRadiovalue") String radioValue){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        modelAndView.addObject("course", courseService.findCourseById(Integer.parseInt(radioValue)));
+        modelAndView.setViewName("faculty/editcourse");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value="/faculty/editcourse", method = RequestMethod.POST)
+    public ModelAndView facultyEditcourse(@ModelAttribute Course course){
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        courseService.saveCourse(course);
+        modelAndView.setViewName("redirect:/faculty/managecourses"); // Need redirect to refresh the faculty/manage page
         return modelAndView;
     }
 }
