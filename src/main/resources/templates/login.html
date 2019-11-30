@@ -11,9 +11,10 @@
     <div class="col-md-8 m-auto"><!-- Grid starts -->
         <!-- BOOTSTRAP CARD -->
         <div class="card card-body border-light shadow bg-white">
-
             <h1 class="card-title"><i class="fas fa-user"></i>  Login</h1>
-
+            <div
+                    th:if="${successMessage != null}"
+                    th:text="${successMessage}" class="alert alert-success"></div>
             <!-- FORM -->
             <form th:action="@{/login}" method="POST">
 
