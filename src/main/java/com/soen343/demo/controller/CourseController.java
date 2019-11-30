@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,8 +27,10 @@ public class CourseController {
 
     private static StringBuilder conflictMessage = new StringBuilder("The following courses have not been added to due conflict(s) with the your current schedule: ");
     private static StringBuilder conflictMessage2 = new StringBuilder("The following selected courses have not been added to due time conflict(s): ");
+    private static StringBuilder conflictMessage3 = new StringBuilder("Some courses have not been added to due maximum course load.");
     private static boolean userCourseConflictError = false;
     private static boolean checkBoxConflictError = false;
+    private static boolean maxCourseLoad = false;
 
     @RequestMapping(value="/student/enroll", method = RequestMethod.GET)
     public ModelAndView enroll(){
@@ -43,6 +47,10 @@ public class CourseController {
         if(checkBoxConflictError) {
             modelAndView.addObject("conflictMessage2",  conflictMessage2);
             checkBoxConflictError = false;
+        }
+        if(maxCourseLoad) {
+            modelAndView.addObject("conflictMessage3",  conflictMessage3);
+            maxCourseLoad = false;
         }
         return modelAndView;
     }
@@ -73,6 +81,7 @@ public class CourseController {
 
         List<String> checkboxValueList = Arrays.asList(checkboxValue);
         List<String> conflictedIdsList = new ArrayList<>();
+
         for(Course c: checkboxConflictCourseList(checkboxValueList)){ // Add the ids of all selected checkbox conflicts to the conflictedIdsList
             conflictedIdsList.add(String.valueOf(c.getId()));
         }
@@ -80,11 +89,25 @@ public class CourseController {
     }
 
     private void addCourses(User user, List<String> checkboxValueList) {
-        boolean addCourse = true;
+
+        //if user list is empty, all courses can be added
+        if(user.getCourses().isEmpty()) {
+            for(String s: checkboxValueList) {
+                Course course_to_add = courseService.findCourseById(Integer.parseInt(s));
+                if(user.getCourses().size() >= 5) {
+                    maxCourseLoad = true;
+                    return;
+                }
+                userService.addCourse(user, course_to_add.getId());
+            }
+            return;
+        }
+
         Course found = new Course();
         conflictMessage = new StringBuilder("The following courses have not been added to due conflict(s) with the your current schedule: ");
-
+        HashMap<Integer, Boolean> hashMap = new HashMap<>();
         List<Course> userCourseList = new ArrayList<>();
+
         for (Course c : user.getCourses())
             userCourseList.add(c);
 
@@ -95,18 +118,28 @@ public class CourseController {
             {
                 if(isTImeConflict(userCourseList.get(j),found))
                 {
-                    addCourse = false;
+                    hashMap.put(found.getId(), false);
+                    break;
+                }
+                else {
+                    hashMap.put(found.getId(), true);
                 }
             }
-            if(addCourse)
-            {
-                userService.addCourse(user, found.getId());
+
+            for (Map.Entry<Integer, Boolean> entry : hashMap.entrySet()) {
+                if (entry.getValue() == true) {
+                    if(user.getCourses().size() >= 5) {
+                        maxCourseLoad = true;
+                        return;
+                    }
+                    userService.addCourse(user, found.getId());
+                }
+                else {
+                    conflictMessage.append(found.getCode() + "-" + found.getSection() + " ");
+                    userCourseConflictError = true;
+                }
             }
-            else
-            {
-                conflictMessage.append(found.getCode() + " " + found.getSection());
-                userCourseConflictError = true;
-            }
+
         }
     }
 
@@ -124,7 +157,7 @@ public class CourseController {
                     course2 = courseService.findCourseById(Integer.parseInt(checkboxValueList.get(j)));
                     if(isTImeConflict(course1,course2))
                     {
-                        conflictMessage2.append(course1.getCode() + " " + course2.getCode());
+                        conflictMessage2.append(course1.getCode() + " " + course2.getCode() + " ");
                         conflictCourseList.add(course1);
                         conflictCourseList.add(course2);
                         checkBoxConflictError = true;
@@ -174,12 +207,24 @@ public class CourseController {
         return modelAndView;
     }
 
+
     @RequestMapping(value="/student/enroll/removecourse", method = RequestMethod.POST)
-    public ModelAndView removecourse(@RequestParam("courseCheckbox") String[] checkboxValue){
+    public ModelAndView removecourse(@RequestParam("courseCheckbox") String[] checkboxValue, RedirectAttributes redirectAttributes){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+
+        List<String> removedCoursesID = new ArrayList<String>();
+        removedCoursesID = Arrays.asList(checkboxValue);
+        List<String> removedCoursesName = new ArrayList<String>();
+
+        for(String s: removedCoursesID) {
+            Course c = courseService.findCourseById(Integer.parseInt(s));
+            removedCoursesName.add(c.getCode() + "-" + c.getSection());
+        }
+        String message = "The following courses have been successfully removed: " + String.join(", ", removedCoursesName);
         userService.removeCourses(user, checkboxValue);
+        redirectAttributes.addFlashAttribute("removedCourseMessage", message);
         modelAndView.setViewName("redirect:/student/enroll");
         return modelAndView;
     }

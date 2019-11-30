@@ -302,7 +302,8 @@
 	      }
 	    }
 		};
-		httpRequest.open('GET', 'https://soen343studentapp.herokuapp.com/student/coursedetail?courseid=' + content);
+		var url = window.location.href.replace('/viewschedule','');
+		httpRequest.open('GET', url + '/student/coursedetail?courseid=' + content);
         // httpRequest.setRequestHeader("Access-Control-Allow-Origin", "*");
     httpRequest.send();
 	};

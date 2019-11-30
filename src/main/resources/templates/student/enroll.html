@@ -16,11 +16,24 @@
                     <div class="card gedf-card mb-5 border-0">
                         <li class="list-group-item">
                             <div class="card-header">
-                                <button th:if="${max}" type="button" class="btn btn-block mt-3 btn-success" disabled>Maximum Number of Courses</button>
-                                <input th:unless="${max}" class="btn-block mt-3 btn-success" type="button" onClick="location.href='/student/enroll/addcourse'" value="Add a Course">
-                                <br/>
-                                <input class="btn-block btn-danger" type="button" onClick="location.href='/student/enroll/removecourse'" value="Remove a Course">
-                                <br />
+                                <div class="row mb-3 w-100" th:unless="${max}">
+                                    <div class="col-6">
+                                        <button class="btn btn-block btn-success m-2" onClick="location.href='/student/enroll/addcourse'" ><i class="far fa-plus-square"></i>   Add a Course</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-block btn-danger m-2" onClick="location.href='/student/enroll/removecourse'"><i class="far fa-trash-alt"></i>   Remove a Course</button>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 w-100" th:if="${max}">
+                                    <div class="col-6">
+                                        <button disabled class="btn btn-block btn-success m-2" ><i class="fas fa-exclamation-triangle"></i>   Maximum Number of Courses</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-block btn-danger m-2" onClick="location.href='/student/enroll/removecourse'"><i class="far fa-trash-alt"></i>   Remove a Course</button>
+                                    </div>
+                                </div>
+
                                 <div th:if="${not #lists.isEmpty(courses)}">
                                 <table class="table table-striped">
                                     <tr>
@@ -44,10 +57,25 @@
                                 <div th:if="${#lists.isEmpty(courses)}">
                                     <p class="text-center" style="font-size: 20px">You are not currently enrolled in any courses.</p>
                                 </div>
-                                <h2><span th:utext="${conflictMessage}"></span></h2>
-                                <br />
-                                <h2><span th:utext="${conflictMessage2}"></span></h2>
-                                <div>
+                                <div
+                                        th:if="${removedCourseMessage != null}"
+                                        th:text="${removedCourseMessage}" class="alert alert-success">
+
+                                </div>
+                                <div
+                                        th:if="${conflictMessage != null}"
+                                        th:text="${conflictMessage}" class="alert alert-danger">
+
+                                </div>
+                                <div
+                                        th:if="${conflictMessage2 != null}"
+                                        th:text="${conflictMessage2}" class="alert alert-danger">
+
+                                </div>
+                                <div
+                                        th:if="${conflictMessage3 != null}"
+                                        th:text="${conflictMessage3}" class="alert alert-danger">
+
                                 </div>
                             </div>
                         </li>

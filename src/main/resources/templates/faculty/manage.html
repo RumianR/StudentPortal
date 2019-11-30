@@ -15,12 +15,17 @@
                     <div class="card gedf-card mb-5 border-0">
                         <li class="list-group-item">
                             <div class="card-header">
-                                <input class="btn-block mt-3 btn-success" type="button" onClick="location.href='/faculty/addcourse'" value="Add a Course">
-                                <br/>
-                                <input class="btn-block btn-warning" type="button" onClick="location.href='/faculty/chosecourse'" value="Edit a Course">
-                                <br />
-                                <input class="btn-block btn-danger" type="button" onClick="location.href='/faculty/removecourse'" value="Remove a Course">
-                                <br />
+                                <div class="row mb-3 w-100">
+                                    <div class="col-4">
+                                        <button class="btn btn-block btn-success m-2" onClick="location.href='/faculty/addcourse'"><i class="far fa-plus-square"></i>   Add a Course</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-block btn-warning m-2 font-light" onClick="location.href='/faculty/chosecourse'"><i class="far fa-edit"></i>   Edit a Course</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-block btn-danger m-2" onClick="location.href='/faculty/removecourse'"><i class="far fa-trash-alt"></i>   Remove a Course</button>
+                                    </div>
+                                </div>
                                 <div th:if="${not #lists.isEmpty(courses)}">
                                 <table class="table table-striped">
                                     <tr>
