@@ -23,10 +23,10 @@ Course Service component has been implemented thus far.
 * Divesh Patel, 40027989 @diveshpatel
 * Umer Anwar, 40032710 @ooms97
 * Tung Leu, 40025151 @leuthotung
-* Vatika Prasad, 40033221
+* Vatika Prasad, 40033221 @Vatika1
 * Seyedhoessein Noorbakhsh, 40036604
 * Chester Yu, 27769504
-* Jimmy Lau, 40044187
+* Jimmy Lau, 40044187 @jimLau49
 
 
 ## Setting Up Your Environment
