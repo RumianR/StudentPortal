@@ -37,8 +37,8 @@ public class CourseService {
         String time = "";
         String[] userSubmittedTime = course.getTime().split(",");
         if(userSubmittedTime.length==3){
-            course.setTimeStart(userSubmittedTime[1]);
-            course.setTimeEnd(userSubmittedTime[2]);
+            course.setTimeStart(userSubmittedTime[1].replaceAll("\\s+",""));
+            course.setTimeEnd(userSubmittedTime[2].replaceAll("\\s+",""));
 
             if(userSubmittedTime[0].contains("Mo")){
                 time+= "Mo";
@@ -61,8 +61,8 @@ public class CourseService {
         }
 
         else if(userSubmittedTime.length==4){
-            course.setTimeStart(userSubmittedTime[2]);
-            course.setTimeEnd(userSubmittedTime[3]);
+            course.setTimeStart(userSubmittedTime[2].replaceAll("\\s+",""));
+            course.setTimeEnd(userSubmittedTime[3].replaceAll("\\s+",""));
 
             for (int i=0; i<2 ; i++){
 

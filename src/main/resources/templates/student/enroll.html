@@ -3,6 +3,7 @@
       layout:decorate="~{fragments/layout}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <title>Enrollment</title>
 </head>
 <body>
@@ -36,12 +37,17 @@
                                         <td th:text="${course.instructor}"></td>
                                         <td th:text="${course.section}"></td>
                                         <td th:text="${course.location}"></td>
-                                        <td th:text="${course.time}"></td>
+                                        <td th:utext="${course.time}"></td>
                                     </tr>
                                 </table>
                                 </div>
                                 <div th:if="${#lists.isEmpty(courses)}">
                                     <p class="text-center" style="font-size: 20px">You are not currently enrolled in any courses.</p>
+                                </div>
+                                <h2><span th:utext="${conflictMessage}"></span></h2>
+                                <br />
+                                <h2><span th:utext="${conflictMessage2}"></span></h2>
+                                <div>
                                 </div>
                             </div>
                         </li>

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class CourseController {
@@ -22,6 +22,11 @@ public class CourseController {
     protected UserService userService;
     @Autowired
     protected CourseService courseService;
+
+    private static StringBuilder conflictMessage = new StringBuilder("The following courses have not been added to due conflict(s) with the your current schedule: ");
+    private static StringBuilder conflictMessage2 = new StringBuilder("The following selected courses have not been added to due time conflict(s): ");
+    private static boolean userCourseConflictError = false;
+    private static boolean checkBoxConflictError = false;
 
     @RequestMapping(value="/student/enroll", method = RequestMethod.GET)
     public ModelAndView enroll(){
@@ -31,6 +36,14 @@ public class CourseController {
         modelAndView.addObject("courses", user.getCourses());
         modelAndView.addObject("max", user.getCourses().size() > 4? true: false);
         modelAndView.setViewName("student/enroll");
+        if(userCourseConflictError) {
+            modelAndView.addObject("conflictMessage",  conflictMessage);
+            userCourseConflictError = false;
+        }
+        if(checkBoxConflictError) {
+            modelAndView.addObject("conflictMessage2",  conflictMessage2);
+            checkBoxConflictError = false;
+        }
         return modelAndView;
     }
 
@@ -51,9 +64,103 @@ public class CourseController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        userService.addCourses(user, checkboxValue);
+        addCourses(user, filterSelectedConflictingCourses(user, checkboxValue));
         modelAndView.setViewName("redirect:/student/enroll"); // Need redirect to refresh the /enroll page
         return modelAndView;
+    }
+
+    private List<String> filterSelectedConflictingCourses(User user, String[] checkboxValue){
+
+        List<String> checkboxValueList = Arrays.asList(checkboxValue);
+        List<String> conflictedIdsList = new ArrayList<>();
+        for(Course c: checkboxConflictCourseList(checkboxValueList)){ // Add the ids of all selected checkbox conflicts to the conflictedIdsList
+            conflictedIdsList.add(String.valueOf(c.getId()));
+        }
+        return checkboxValueList.stream().filter(id -> !conflictedIdsList.contains(id)).collect(Collectors.toList()); // checkboxValueList has no conflicting courses from the selected checkboxes
+    }
+
+    private void addCourses(User user, List<String> checkboxValueList) {
+        boolean addCourse = true;
+        Course found = new Course();
+        conflictMessage = new StringBuilder("The following courses have not been added to due conflict(s) with the your current schedule: ");
+
+        List<Course> userCourseList = new ArrayList<>();
+        for (Course c : user.getCourses())
+            userCourseList.add(c);
+
+        for (int i = 0; i < checkboxValueList.size();i++)
+        {
+            found = courseService.findCourseById(Integer.parseInt(checkboxValueList.get(i)));
+            for(int j = 0; j < userCourseList.size(); j++)
+            {
+                if(isTImeConflict(userCourseList.get(j),found))
+                {
+                    addCourse = false;
+                }
+            }
+            if(addCourse)
+            {
+                userService.addCourse(user, found.getId());
+            }
+            else
+            {
+                conflictMessage.append(found.getCode() + " " + found.getSection());
+                userCourseConflictError = true;
+            }
+        }
+    }
+
+    private List<Course> checkboxConflictCourseList(List<String> checkboxValueList) {
+        Course course1 = new Course();
+        Course course2 = new Course();
+        List<Course> conflictCourseList = new ArrayList<>();
+        conflictMessage2 = new StringBuilder("The following selected courses have not been added to due time conflict(s): ");
+
+        if(checkboxValueList != null){
+            for(int i=0; i<checkboxValueList.size();++i){
+                for(int j=i+1;j<checkboxValueList.size();++j)
+                {
+                    course1 = courseService.findCourseById(Integer.parseInt(checkboxValueList.get(i)));
+                    course2 = courseService.findCourseById(Integer.parseInt(checkboxValueList.get(j)));
+                    if(isTImeConflict(course1,course2))
+                    {
+                        conflictMessage2.append(course1.getCode() + " " + course2.getCode());
+                        conflictCourseList.add(course1);
+                        conflictCourseList.add(course2);
+                        checkBoxConflictError = true;
+                    }
+                }
+            }
+        }
+        return conflictCourseList;
+    }
+
+    private boolean isTImeConflict(Course course1, Course course2){
+        List<String> courseDaysList1 = getCourseDays(course1);
+        List<String> courseDaysList2 = getCourseDays(course2);
+        if((courseDaysList1.stream().anyMatch(day -> courseDaysList2.contains(day))) &&
+                ((course1.getTimeStart().compareTo(course2.getTimeStart()) > 0) && (course1.getTimeStart().compareTo(course2.getTimeEnd()) < 0) ||
+                (course2.getTimeStart().compareTo(course1.getTimeStart()) > 0) && (course2.getTimeStart().compareTo(course1.getTimeEnd()) < 0))
+        )
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private List<String> getCourseDays(Course course) {
+        List<String> daysList = new ArrayList<>();
+        if(course.getTime().contains("Mo"))
+            daysList.add("Mo");
+        if(course.getTime().contains("Tu"))
+            daysList.add("Tu");
+        if(course.getTime().contains("We"))
+            daysList.add("We");
+        if(course.getTime().contains("Th"))
+            daysList.add("Th");
+        if(course.getTime().contains("Fr"))
+            daysList.add("Fr");
+        return daysList;
     }
 
 
