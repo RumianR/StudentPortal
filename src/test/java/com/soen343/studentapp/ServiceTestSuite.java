@@ -1,8 +1,8 @@
-package com.soen343.demo;
+package com.soen343.studentapp;
 
 
-import com.soen343.demo.service.CourseServiceTest;
-import com.soen343.demo.service.UserServiceTest;
+import com.soen343.studentapp.service.CourseServiceTest;
+import com.soen343.studentapp.service.UserServiceTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

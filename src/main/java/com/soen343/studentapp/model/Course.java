@@ -1,4 +1,4 @@
-package com.soen343.demo.model;
+package com.soen343.studentapp.model;
 
 
 import lombok.AllArgsConstructor;

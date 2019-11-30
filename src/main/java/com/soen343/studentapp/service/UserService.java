@@ -1,12 +1,12 @@
-package com.soen343.demo.service;
+package com.soen343.studentapp.service;
 
 
-import com.soen343.demo.model.Course;
-import com.soen343.demo.model.Role;
-import com.soen343.demo.model.User;
-import com.soen343.demo.repository.RoleRepository;
-import com.soen343.demo.repository.UserRepository;
-import com.soen343.demo.repository.CourseRepository;
+import com.soen343.studentapp.model.Course;
+import com.soen343.studentapp.model.Role;
+import com.soen343.studentapp.model.User;
+import com.soen343.studentapp.repository.RoleRepository;
+import com.soen343.studentapp.repository.UserRepository;
+import com.soen343.studentapp.repository.CourseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,13 +1,13 @@
-package com.soen343.demo;
+package com.soen343.studentapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class StudentApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(StudentApp.class, args);
 	}
 
 }

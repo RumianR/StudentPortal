@@ -1,28 +1,21 @@
-package com.soen343.demo.controller;
+package com.soen343.studentapp.controller;
 
-import com.soen343.demo.model.Course;
-import com.soen343.demo.model.User;
-import com.soen343.demo.service.CourseService;
-import com.soen343.demo.service.UserService;
+import com.soen343.studentapp.model.User;
+import com.soen343.studentapp.service.CourseService;
+import com.soen343.studentapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.*;
-
-
-import java.util.ArrayList;
-import java.util.Set;
 
 @Controller
 public class LoginController{

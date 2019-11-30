@@ -1,4 +1,4 @@
-package com.soen343.demo;
+package com.soen343.studentapp;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
