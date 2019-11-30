@@ -30,6 +30,10 @@ public class CourseService {
     }
 
     public Course saveCourse(Course course) {
+        if(course == null || course.getTime() == null || course.getTime().length() == 0) {
+            return null;
+        }
+
         String time = "";
         String[] userSubmittedTime = course.getTime().split(",");
         if(userSubmittedTime.length==3){
@@ -92,16 +96,10 @@ public class CourseService {
     }
 
     public void removeCourses(String[] CoursesRequest) {
-
-
         List<Integer> courseIds = new ArrayList<>();
 
         for (int i = 0; i < CoursesRequest.length; i++) {
             courseRepository.deleteById(Integer.parseInt(CoursesRequest[i]));
         }
-
-
-
     }
-
 }

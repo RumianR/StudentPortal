@@ -44,7 +44,9 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-
+        if(user == null) {
+            return null;
+        }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("STUDENT");
@@ -55,15 +57,24 @@ public class UserService {
 
     public void addCourses(User user, String[] CoursesRequest) {
 
+        if(CoursesRequest == null) {
+            return;
+        }
 
         int[] courseIds = new int[CoursesRequest.length];
         for (int i = 0; i < CoursesRequest.length; i++) {
-            courseIds[i] = Integer.parseInt(CoursesRequest[i]);
+            try{
+                courseIds[i] = Integer.parseInt(CoursesRequest[i]);
+            }catch (NumberFormatException e) {
+                //Do Nothing
+            }
         }
 
         List<Course> courseList = courseRepository.findByIdIn(courseIds);
         Set<Course> currentCourses = user.getCourses();
-        currentCourses.addAll(courseList);
+        if(currentCourses != null) {
+            currentCourses.addAll(courseList);
+        }
         user.setCourses(currentCourses);
 
         userRepository.save(user);
@@ -72,15 +83,24 @@ public class UserService {
 
     public void removeCourses(User user, String[] CoursesRequest) {
 
+        if(CoursesRequest == null) {
+            return;
+        }
 
         int[] courseIds = new int[CoursesRequest.length];
         for (int i = 0; i < CoursesRequest.length; i++) {
-            courseIds[i] = Integer.parseInt(CoursesRequest[i]);
+            try{
+                courseIds[i] = Integer.parseInt(CoursesRequest[i]);
+            }catch (NumberFormatException e) {
+                //Do Nothing
+            }
         }
 
         List<Course> courseList = courseRepository.findByIdIn(courseIds);
         Set<Course> currentCourses = user.getCourses();
-        currentCourses.removeAll(courseList);
+        if(currentCourses != null) {
+            currentCourses.removeAll(courseList);
+        }
         user.setCourses(currentCourses);
 
         userRepository.save(user);

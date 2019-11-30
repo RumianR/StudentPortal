@@ -114,11 +114,7 @@ public class UserServiceTest {
 
     @Test
     public void saveUser() {
-
-        // Run the test
         User result = userServiceUnderTest.saveUser(user);
-
-        // Verify the results
 
         assertEquals(result.getActive(), 1);
         assertEquals(result.getId(), id);
@@ -126,6 +122,13 @@ public class UserServiceTest {
         assertEquals(result.getLastName(), lastName);
         assertEquals(result.getEmail(), email);
     }
+
+    @Test
+    public void saveNullUser() {
+        User result = userServiceUnderTest.saveUser(null);
+        assertNull(result);
+    }
+
 
     @Test
     public void addCourses() {
@@ -147,6 +150,28 @@ public class UserServiceTest {
     }
 
     @Test
+    public void addCoursesNullCourseRequest() {
+        userServiceUnderTest.addCourses(user, null);
+    }
+
+    @Test
+    public void addCoursesEmptyCourseRequest() {
+        String[] courseRequest = {""};
+        User user = User.builder().build();
+        userServiceUnderTest.addCourses(user, courseRequest);
+        assertNull(user.getCourses());
+    }
+
+    @Test
+    public void addCoursesWrongCourseRequest() {
+        String[] courseRequest = {"abc"};
+        User user = User.builder().build();
+        userServiceUnderTest.addCourses(user, courseRequest);
+        assertNull(user.getCourses());
+    }
+
+
+    @Test
     public void removeCourses() {
         Set<Course> courses = new HashSet<>();
         courses.add(course);
@@ -158,4 +183,26 @@ public class UserServiceTest {
 
         assertEquals(0, userCourseSize);
     }
+
+    @Test
+    public void removeCoursesNullCourseRequest() {
+        userServiceUnderTest.removeCourses(user, null);
+    }
+
+    @Test
+    public void removeCoursesEmptyCourseRequest() {
+        String[] courseRequest = {""};
+        User user = User.builder().build();
+        userServiceUnderTest.removeCourses(user, courseRequest);
+        assertNull(user.getCourses());
+    }
+
+    @Test
+    public void removeCoursesWrongCourseRequest() {
+        String[] courseRequest = {"abc"};
+        User user = User.builder().build();
+        userServiceUnderTest.removeCourses(user, courseRequest);
+        assertNull(user.getCourses());
+    }
+
 }
