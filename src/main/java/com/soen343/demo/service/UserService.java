@@ -80,7 +80,15 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void addCourse(User user, int CoursesRequest) {
 
+        Set<Course> currentCourses = user.getCourses();
+        currentCourses.add(courseRepository.findCourseById(CoursesRequest));
+        user.setCourses(currentCourses);
+
+        userRepository.save(user);
+    }
+    
     public void removeCourses(User user, String[] CoursesRequest) {
 
         if(CoursesRequest == null) {
