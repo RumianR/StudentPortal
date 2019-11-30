@@ -1,4 +1,4 @@
-package com.soen343.demo.configuration;
+package com.soen343.studentapp.configuration;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;

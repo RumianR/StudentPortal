@@ -1,10 +1,10 @@
-package com.soen343.demo.service;
+package com.soen343.studentapp.service;
 
-import com.soen343.demo.model.Course;
-import com.soen343.demo.model.User;
-import com.soen343.demo.repository.CourseRepository;
-import com.soen343.demo.repository.RoleRepository;
-import com.soen343.demo.repository.UserRepository;
+import com.soen343.studentapp.model.Course;
+import com.soen343.studentapp.model.User;
+import com.soen343.studentapp.repository.CourseRepository;
+import com.soen343.studentapp.repository.RoleRepository;
+import com.soen343.studentapp.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

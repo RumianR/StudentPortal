@@ -1,8 +1,8 @@
-package com.soen343.demo.controller;
-import com.soen343.demo.model.User;
-import com.soen343.demo.model.Course;
-import com.soen343.demo.service.CourseService;
-import com.soen343.demo.service.UserService;
+package com.soen343.studentapp.controller;
+import com.soen343.studentapp.model.User;
+import com.soen343.studentapp.model.Course;
+import com.soen343.studentapp.service.CourseService;
+import com.soen343.studentapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

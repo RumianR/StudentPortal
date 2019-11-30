@@ -1,6 +1,6 @@
-package com.soen343.demo.repository;
+package com.soen343.studentapp.repository;
 
-import com.soen343.demo.model.User;
+import com.soen343.studentapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

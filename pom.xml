@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.soen343</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>studentapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<name>studentapp</name>
 	<description>Student Portal</description>
 
 	<properties>

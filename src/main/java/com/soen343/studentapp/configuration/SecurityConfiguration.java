@@ -1,4 +1,4 @@
-package com.soen343.demo.configuration;
+package com.soen343.studentapp.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

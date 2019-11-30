@@ -1,4 +1,4 @@
-package com.soen343.demo.configuration;
+package com.soen343.studentapp.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
