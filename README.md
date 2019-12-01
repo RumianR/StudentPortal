@@ -25,7 +25,7 @@ Course Service component has been implemented thus far.
 * Tung Leu, 40025151 @leuthotung
 * Vatika Prasad, 40033221 @Vatika1
 * Seyedhoessein Noorbakhsh, 40036604
-* Chester Yu, 27769504
+* Chester Yu, 27769504 @ChesterLY
 * Jimmy Lau, 40044187 @jimLau49
 
 
