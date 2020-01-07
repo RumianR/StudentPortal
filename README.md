@@ -37,3 +37,7 @@ Course Service component has been implemented thus far.
 * To use a Student account, you can register a new account or simply login with: email: `jobs@student.ca` 
 and password: `abc123`.
 * To use a Faculty account, login with: email: `abel@faculty.ca` and password: `abc123`.
+
+## Document Link
+
+https://drive.google.com/file/d/1Dg0YzWbMpSHg1lFgPhxBnu3sYs3N1jQp/view?usp=sharing
